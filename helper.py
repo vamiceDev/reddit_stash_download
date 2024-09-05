@@ -39,7 +39,7 @@ def make_filename(output_dir, submission, extension, index=None):
         filename = '[' + slugify(submission.author, True) + '] ' + slugify(submission.title, True) + '.' + extension
     return os.path.join(output_dir, filename[0:200])
 
-z
+
 def get_file(download_url, submission, session, index=None, ):
     extension = get_extension(download_url)
     output_dir = os.path.join(OUT_FOLDER, submission.subreddit.display_name)
@@ -67,7 +67,7 @@ def imgur_error_check(input_file,output_dir):
         imgur_error_check.imgur_error_size=os.path.getsize(imgur_error_file)
     file_size=os.path.getsize(input_file)
     if imgur_error_check.imgur_error_size==file_size:
-        if open(imgur_error_file,"rb").read() != open(input_file,"rb").read():
+        if open(imgur_error_file,"rb").read() == open(input_file,"rb").read():
             os.remove(input_file)
             if len(os.listdir(output_dir)) == 0:
                 os.rmdir(output_dir)
@@ -77,7 +77,7 @@ def imgur_error_check(input_file,output_dir):
     if not imgur_error_check.imgur_logo_size:
         imgur_error_check.imgur_logo_size=os.path.getsize(imgur_logo_file)
     if imgur_error_check.imgur_logo_size==file_size:
-        if open(imgur_logo_file,"rb").read() != open(input_file,"rb").read():
+        if open(imgur_logo_file,"rb").read() == open(input_file,"rb").read():
             os.remove(input_file)
             if len(os.listdir(output_dir)) == 0:
                 os.rmdir(output_dir)
