@@ -40,12 +40,7 @@ Save the relevant information in the .env file under the IMGUR portions.
 
 ## Redgifs
 Redgifs doesn't require a login, but does require a specific header to not reject the download request.
-The redgifs python library: https://github.com/scrazzz/redgifs  handles this smoothly.
-
-However, as of 9/5/2024, there is a bug: https://github.com/scrazzz/redgifs/issues/37 that requires downloading the most recent version from GitHub:
-
-`pip install --force-reinstall git+https://github.com/scrazzz/redgifs`
-
+The redgifs python library  handles this smoothly.
 
 # Result Formatting
 ## File structure
