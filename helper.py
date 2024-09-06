@@ -197,7 +197,7 @@ def add_gallery_to_stash(stash, submission, file_path, img_paths):
     gallery_id = get_gallery_id(stash,file_path)
     if not gallery_id:
         with open("missing.txt", 'a', encoding="utf-8") as f:
-            f.write("reddit.com" + submission.permalink + "\n")
+            f.write("https://reddit.com" + submission.permalink + "\n")
             f.write(file_path + "\n")
             f.write("\n")
         return
@@ -212,17 +212,17 @@ def add_gallery_to_stash(stash, submission, file_path, img_paths):
     if submission.author and 'performer_ids' not in gallery:
         performer_id = create_performer(stash, submission)
         stash.update_gallery({"id": gallery_id, "title": title,
-                              "studio_id": studio_id, "url": "http://reddit.com" + submission.permalink,
+                              "studio_id": studio_id, "url": "https://reddit.com" + submission.permalink,
                               "performer_ids": [performer_id], "date": date_str})
     else:
         stash.update_gallery({"id": gallery_id, "title": title,
-                              "studio_id": studio_id, "url": "http://reddit.com" + submission.permalink,
+                              "studio_id": studio_id, "url": "https://reddit.com" + submission.permalink,
                               "date": date_str})
     for index, img_path in enumerate(img_paths):
         img_id = get_image_id(stash,img_path)
         if not img_id:
             with open("missing.txt", 'a', encoding="utf-8") as f:
-                f.write("reddit.com" + submission.permalink + "\n")
+                f.write("https://reddit.com" + submission.permalink + "\n")
                 f.write(img_path + "\n")
                 f.write("\n")
             continue
@@ -230,11 +230,11 @@ def add_gallery_to_stash(stash, submission, file_path, img_paths):
         if submission.author and 'performer_ids' not in image:
             performer_id = create_performer(stash, submission)
             stash.update_image({"id": img_id, "title": title + " " + str(index + 1),
-                                "url": "http://reddit.com" + submission.permalink, "date": date_str,
+                                "url": "https://reddit.com" + submission.permalink, "date": date_str,
                                 "studio_id": studio_id, "performer_ids": [performer_id]})
         else:
             stash.update_image({"id": img_id, "title": title + " " + str(index),
-                                "url": "http://reddit.com" + submission.permalink, "date": date_str,
+                                "url": "https://reddit.com" + submission.permalink, "date": date_str,
                                 "studio_id": studio_id})
 
 
@@ -246,7 +246,7 @@ def add_image_to_stash(stash, submission, file_path):
     img_id = get_image_id(stash,file_path)
     if not img_id:
         with open("missing.txt", 'a', encoding="utf-8") as f:
-            f.write("reddit.com" + submission.permalink + "\n")
+            f.write("https://reddit.com" + submission.permalink + "\n")
             f.write(file_path + "\n")
             f.write("\n")
         return
@@ -261,11 +261,11 @@ def add_image_to_stash(stash, submission, file_path):
     if submission.author and 'performer_ids' not in image:
         performer_id = create_performer(stash, submission)
         stash.update_image({"id": img_id, "title": title,
-                            "url": "http://reddit.com" + submission.permalink, "date": date_str,
+                            "url": "https://reddit.com" + submission.permalink, "date": date_str,
                             "studio_id": studio_id, "performer_ids": [performer_id]})
     else:
-        stash.update_image({"id": img_id, "title": title, "url": "http://reddit.com" + submission.permalink,
-                            "url": "http://reddit.com" + submission.permalink, "date": date_str,
+        stash.update_image({"id": img_id, "title": title, "url": "https://reddit.com" + submission.permalink,
+                            "url": "https://reddit.com" + submission.permalink, "date": date_str,
                             "studio_id": studio_id, "date": date_str})
 
 
@@ -273,7 +273,7 @@ def add_scene_to_stash(stash, submission, output_file):
     scene_id = get_scene_id(stash,output_file)
     if not scene_id:
         with open("missing.txt", 'a', encoding="utf-8") as f:
-            f.write("reddit.com" + submission.permalink + "\n")
+            f.write("https://reddit.com" + submission.permalink + "\n")
             f.write(output_file + "\n")
             f.write("\n")
         return
@@ -287,10 +287,10 @@ def add_scene_to_stash(stash, submission, output_file):
     date_str = created_date.strftime("%Y-%m-%d")
     if submission.author and 'performer_ids' not in scene:
         performer_id = create_performer(stash, submission)
-        stash.update_scene({"id": scene_id, "title": title, "url": "reddit.com" + submission.permalink,
+        stash.update_scene({"id": scene_id, "title": title, "url": "https://reddit.com" + submission.permalink,
                             "studio_id": studio_id, "performer_ids": [performer_id], "date": date_str})
     else:
-        stash.update_scene({"id": scene_id, "title": title, "url": "reddit.com" + submission.permalink,
+        stash.update_scene({"id": scene_id, "title": title, "url": "https://reddit.com" + submission.permalink,
                             "studio_id": studio_id, "date": date_str})
 
 
