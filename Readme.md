@@ -22,6 +22,9 @@ OUT_FOLDER is the location downloaded images, galleries, and scenes should be st
 
 # APIS
 
+## Stash
+If you have a username/password enabled, go to Settings >  Security > API Key > Generate API Key and copy it into your .env file.
+
 ## Reddit
 Create a new app at https://www.reddit.com/prefs/apps/ Specify that it is a Script.  The redirect URI can be anything, including localhost, it won't be used.
 
