@@ -140,6 +140,15 @@ def get_scene_id(stash,file_path):
         return None
 
 
+def get_folder_id(stash,file_path):
+    results=stash.sql_query(f"SELECT id FROM folders WHERE path='{os.path.dirname(file_path)}'")
+    rows = results['rows']
+    if rows:
+        return rows[0][0]
+    else:
+        scan_and_wait(stash,os.path.dirname(file_path))
+        return get_folder_id(stash,file_path)
+
 def create_studio(stash, submission):
     result = stash.find_studio(studio=submission.subreddit.display_name)
     if result:
@@ -295,6 +304,8 @@ def add_scene_to_stash(stash, submission, output_file):
 
 
 def scan_and_wait(stash, file_path):
+    if not get_folder_id(stash,file_path):
+        scan_and_wait(os.path.dirname(file_path))
     stash.metadata_scan(paths=[file_path])
     queue = stash.job_queue()
     if queue:
