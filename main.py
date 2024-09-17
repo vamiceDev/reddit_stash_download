@@ -78,6 +78,8 @@ def main():
             "ApiKey": os.getenv('STASH_API_KEY'),
             "logger": log
         })
+    if not os.path.exists(OUT_FOLDER):
+        os.mkdir(OUT_FOLDER)
     with open(IN_FILENAME, 'r', encoding="utf8") as in_file:
         data = csv.reader(in_file)
         i = 0

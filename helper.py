@@ -304,8 +304,6 @@ def add_scene_to_stash(stash, submission, output_file):
 
 
 def scan_and_wait(stash, file_path):
-    if not get_folder_id(stash,file_path):
-        scan_and_wait(os.path.dirname(file_path))
     stash.metadata_scan(paths=[file_path])
     queue = stash.job_queue()
     if queue:
