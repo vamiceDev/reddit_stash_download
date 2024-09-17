@@ -3,5 +3,5 @@ requests~=2.32.3
 redgifs~=1.9.5
 beautifulsoup4~=4.12.3
 python-dotenv~=1.0.1
-stashapp_tools~=0.2.53
+stashapp_tools~=0.2.54
 imgur-python~=0.2.4
