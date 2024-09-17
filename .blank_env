@@ -9,3 +9,11 @@ IMGUR_CLIENT_SECRET=
 
 IN_FILENAME=
 OUT_FOLDER=
+
+#Stash Defaults
+STASH_SCHEME="http"
+STASH_HOST="localhost"
+STASH_PORT="9999"
+#Only if you have username/password enabled.
+# Go to Settings > Security > API Key to generate.
+STASH_API_KEY=
