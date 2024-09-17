@@ -63,13 +63,21 @@ def main():
     red.login()
 
     missed_results=[]
-
-    stash = StashInterface({
-        "scheme": "http",
-        "domain": "localhost",
-        "port": "9999",
-        "logger": log
-    })
+    if not os.getenv('STASH_API_KEY'):
+        stash = StashInterface({
+            "scheme": os.getenv('STASH_SCHEME'),
+            "host":  os.getenv('STASH_HOST'),
+            "port": os.getenv('STASH_PORT'),
+            "logger": log
+        })
+    else:
+        stash = StashInterface({
+            "scheme": os.getenv('STASH_SCHEME'),
+            "host": os.getenv('STASH_HOST'),
+            "port": os.getenv('STASH_PORT'),
+            "ApiKey": os.getenv('STASH_API_KEY'),
+            "logger": log
+        })
     with open(IN_FILENAME, 'r', encoding="utf8") as in_file:
         data = csv.reader(in_file)
         i = 0
