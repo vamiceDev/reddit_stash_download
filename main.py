@@ -80,6 +80,7 @@ def main():
         })
     if not os.path.exists(OUT_FOLDER):
         os.mkdir(OUT_FOLDER)
+    scan_and_wait(stash,OUT_FOLDER)
     with open(IN_FILENAME, 'r', encoding="utf8") as in_file:
         data = csv.reader(in_file)
         i = 0
@@ -119,7 +120,7 @@ def main():
                             os.mkdir(output_dir)
                         if len(img_urls) == 1:
                             file_path = get_file(img_urls[0], submission,imgur_requests_client)
-                            scan_and_wait(stash, file_path)
+                            scan_and_wait(stash, os.path.dirname(file_path))
                             add_image_to_stash(stash, submission, file_path)
                         else:
                             img_paths = []
@@ -132,7 +133,7 @@ def main():
                                         archive.write(file_path,
                                                       arcname=make_filename('', submission, extension, index + 1))
                                         os.remove(file_path)
-                            scan_and_wait(stash, archive_name)
+                            scan_and_wait(stash, os.path.dirname(archive_name))
                             add_gallery_to_stash(stash, submission, archive_name, img_paths)
                 elif 'imgur.com' in download_url:
                     img_id = download_url.rsplit('/', 1)[-1].split('.')[0]
@@ -145,7 +146,7 @@ def main():
                     if not cur_missed:
                         img_url = img['response']['data']['link']
                         file_path = get_file(img_url, submission,imgur_requests_client)
-                        scan_and_wait(stash, file_path)
+                        scan_and_wait(stash, os.path.dirname(file_path))
                         add_image_to_stash(stash, submission, file_path)
                 elif 'redgifs.com' in download_url:
                     img_id = download_url.rsplit('/', 1)[-1].split('.')[0].lower()
@@ -168,11 +169,11 @@ def main():
                             missed_results.append(row)
                             missed += 1
                             continue
-                    scan_and_wait(stash, file_path)
+                    scan_and_wait(stash, os.path.dirname(file_path))
                     add_scene_to_stash(stash, submission, file_path)
                 elif 'i.redd.it' in download_url:
                     file_path = get_file(download_url, submission,reddit_requests_client)
-                    scan_and_wait(stash, file_path)
+                    scan_and_wait(stash, os.path.dirname(file_path))
                     add_image_to_stash(stash, submission, file_path)
                 elif 'reddit.com/gallery' in download_url:
                     result = reddit_requests_client.get(download_url)
@@ -197,7 +198,7 @@ def main():
                         os.mkdir(output_dir)
                     if len(img_urls) == 1:
                         file_path = get_file(img_urls[0], submission,reddit_requests_client)
-                        scan_and_wait(stash, file_path)
+                        scan_and_wait(stash, os.path.dirname(file_path))
                         add_image_to_stash(stash, submission, file_path)
                     else:
                         img_paths = []
@@ -210,11 +211,11 @@ def main():
                                     archive.write(file_path, arcname=make_filename('', submission, extension, index))
                                     img_paths.append(file_path)
                                     os.remove(file_path)
-                        scan_and_wait(stash, archive_name)
+                        scan_and_wait(stash, os.path.dirname(archive_name))
                         add_gallery_to_stash(stash, submission, archive_name, img_paths)
                 elif '.jpg' in download_url or '.png' in download_url:
                     file_path = get_file(download_url, submission,reddit_requests_client)
-                    scan_and_wait(stash, file_path)
+                    scan_and_wait(stash, os.path.dirname(file_path))
                     add_image_to_stash(stash, submission, file_path)
                 elif download_url != '':
                     missed_results.append(row)
@@ -225,7 +226,7 @@ def main():
                             img_url=submission.preview['images'][0]['source']['url']
                             if 'external-preview.redd.it' in img_url:
                                 file_path = get_file(img_url, submission,reddit_requests_client)
-                                scan_and_wait(stash, file_path)
+                                scan_and_wait(stash, os.path.dirname(file_path))
                                 add_image_to_stash(stash, submission, file_path)
                             elif 'redditmedia.com' in img_url:
                                 print(img_url)
@@ -248,7 +249,7 @@ def main():
                                 for index, img_url in enumerate(img_urls):
                                     file_path = get_file(img_url, submission,reddit_requests_client, index + 1)
                                     img_paths.append(file_path)
-                            scan_and_wait(stash, archive_name)
+                            scan_and_wait(stash, os.path.dirname(archive_name))
                             add_gallery_to_stash(stash, submission, archive_name, img_paths)
                     else:
                         missed_results.append(row)
