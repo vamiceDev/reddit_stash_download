@@ -242,7 +242,7 @@ def add_gallery_to_stash(stash, submission, file_path, img_paths):
                                 "url": "https://reddit.com" + submission.permalink, "date": date_str,
                                 "studio_id": studio_id, "performer_ids": [performer_id]})
         else:
-            stash.update_image({"id": img_id, "title": title + " " + str(index),
+            stash.update_image({"id": img_id, "title": title + " " + str(index + 1),
                                 "url": "https://reddit.com" + submission.permalink, "date": date_str,
                                 "studio_id": studio_id})
 
